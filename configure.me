@@ -1,0 +1,32 @@
+# Variables cannot begin with a "-" character.
+
+USER="admin"
+PASS="adminpass"
+URL="http://192.168.8.1"
+DIR="/dev/shm/tmp/lte" # TMP dir, to save the life of the SD card. Feel free to replace.
+ADMINPHONE="+12345678901" # Default destination for outbound SMS
+#ADMINMAIL="" # Deprecated (as it becomes "safer" but less usable), RIP
+SMSPWD="YubiKeyC00l" # No intended for production, but OK for testing (password to run commands by SMS)
+
+# Telegram Bot https://core.telegram.org/bots 
+TTOKEN="123456789:ABC-DEF1234ghIkl-zyx57W2v1u123ew11" # Change it to Your own
+TCHATID="123456789" # Change it to Your own
+
+# YubiKey Auth server (local!) LTE sometimes disconnects from the network by design. 
+YUBIKEYURL="http://127.0.0.1:8000/wsapi/2.0/verify"
+YUBIKEY_ENABLED="0" # Enabled 1, Disabled 0, if enabled - "SMSPWD" inutile. 
+
+# "Numberless" satellite messenger
+# 1) Set up your personal Check-In pattern as shown in the example. If you don't know what it is, this is not the best place to start.
+# 2) Add your SIM card's phone number to the list of recipients of Check-In messages in your satellite messenger.
+# 3) Send Check-In from Your satellite messenger.
+# 4) Confirm that this is your Chechk-In by executing any authorized OTP command from your messenger, for example "cccjgjgkhcbbirdrfdnlnghhfgrtnnlgedjlftrbdeut lte uptime"
+# Until the confirmation procedure is completed, no any SMS will be sent to the satellite messenger. We don't know that this is exactly Your number.
+
+SATUNSAFE="0" # If set to 1, will forward all messages without authorization, You will pay for all spam and errors.
+CHECKIN=" - John Doe" # Each SAT Check-In SMS from your device has your own personalized fingerprint (cannot begin with a "-" character like and all other variables).
+
+# The data below is updated automatically, change manually only if You understand what You are doing.
+CHECKINNUM="not defined"
+SATSMS="not defined"
+

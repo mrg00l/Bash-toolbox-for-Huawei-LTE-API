@@ -1,0 +1,7 @@
+# Ignore log files and temporary files
+*.log
+*.tmp
+
+# Ignore test
+test.sh
+

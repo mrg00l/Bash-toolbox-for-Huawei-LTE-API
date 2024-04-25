@@ -1,0 +1,18 @@
+I don't plan to use this code on my MacBook. 
+But I tested some of the code on it (Sonoma), 
+such as changing the frequency and sending SMS. 
+If you need it, do it yourself, it's easy, it's Bash! 
+
+As an example, the main login function:
+
+F_login_mac() {
+        [ -d "$DIR" ] && rm -rf "$DIR" # Start from scratch
+        mkdir -p "$DIR"
+        TOKEN=$(curl -s -c $DIR/cookie $URL/html/index.html | grep csrf_token | tail -n 1 | cut -d '"' -f 4)
+        echo "Token: $TOKEN"
+        KEY=$(echo -n "$PASS" | shasum -a 256 | cut -d ' ' -f1 | tr -d "\n" | base64 | tr -d '\n')
+        FIRSTNONCE=$(echo -n "$USER$KEY$TOKEN" | shasum -a 256 | cut -d ' ' -f1 | tr -d "\n" | base64 | tr -d '\n')
+        XML="<?xml version=\"1.0\" encoding=\"UTF-8\"?><request><Username>$USER</Username><Password>$FIRSTNONCE</Password><password_type>4</password_type></request>"
+        response=$(curl -s -i -b "$DIR/cookie" -c "$DIR/cookie" -X POST -H "__RequestVerificationToken: $TOKEN" -d "$XML" "$URL/api/user/login")
+        echo "$response" | grep "Token:" | cut -d "#" -f3 | sed 's/[^[:alnum:]]//g' > "$DIR/token"
+	}

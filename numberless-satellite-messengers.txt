@@ -1,0 +1,172 @@
+How to Assign Your Own Dedicated SMS Phone Number to Your Numberless Satellite Communicator (and Why You Shouldn't Do It)
+
+(For Entertainment Purposes Only; Not Suitable for Emergency or Vital Communications)
+
+The simplest solution, without incurring expenses for equipment or software, would be to hire a secretary who can send you only the messages you need.
+However, this solution may not be available 24/7 and might not meet your requirements.
+
+--- DISCLAIMER ---
+I do not accept any responsibility for the actions you take, which are done at your own peril and risk.
+The information provided is for informational purposes only, and it is your personal responsibility to comply with the licenses for the use of any equipment or software.
+For instance, while it is legal to read about the -R option for ssh, utilizing it with consequences falls solely on you.
+
+By bypassing the secure feature of "no phone number - no spam fees," you might end up paying a significant amount to your service provider
+if something goes wrong and you accidentally send numerous messages to your satellite communicator, or worse, fail to receive an important message.
+Different providers may offer varying solutions, and what works for one may not be suitable for others.
+
+I have provided a clear warning; if these conditions are not acceptable to you, please refrain from reading further.
+------------------
+
+
+Since the telephone network relies on telephone numbers for addressing, whether you like it or not, some form of number, even if temporary, is required for the two-way "numberless" SMS messenger to function.
+
+Here's how two-way "numberless" satellite messengers operate:
+
+Suppose you find yourself stuck somewhere in the Baltic Sea while traveling from Sweden to a party with friends in Finland...
+
+You compose an SMS ($1) from your "numberless" messenger to your wife (+4611111111): "Everything is fine, but I'm running late. Lars"
+She receives a text message from an unknown number (+46111122222) and responds:
+... after 5 minutes ...
+SMS ($2): "Okay, Lars, but contact Jukka, everyone is quite worried about your whereabouts. He's unable to reach you via the number +46111122222 something seems amiss."
+
+Then, you send an SMS ($3) to Jukka (+3581111111111): "All is well, I'm stuck but on my way, don't worry, I'll be there shortly. Lars"
+Jukka receives this message from an unknown number (+3585551112222) and replies:
+($3) "Lars? Where are you? Why a Finnish phone number? Have you already arrived? Have you lost your phone?"
+($4) "When are you planning to arrive? Everyone's eagerly awaiting your arrival!"
+($5) "What's going on?"
+($6) "No one can reach you on this number, not even your wife! Only I can."
+... after 5 minutes ...
+($7) "Why the silence? Are you ignoring me? What's happening? And call your wife!"
+... after 5 minutes ...
+Your wife sends an SMS from +4611111111 to +46111122222:
+($8) "Jukka just called me. He mentioned you have a new number, he located you on +3585551112222, but I'm unable to reach you on it. Are you already in Finland?!"
+
+As you can see, things can get a bit tricky when people aren't familiar with the underlying mechanics :)
+
+Of course, your wife will likely understand how it works, and satellite messages often come with their own set of specifics, which can add additional context to the message.
+This is just an illustrative example.
+
+So, let's break it down. It doesn't operate like DHCP, but rather akin to how NAT functions in your home router. For the sake of simplicity, we'll gloss over some details.
+
+Your computer, residing on a private network (your messenger in a private SAT network), sends requests (SMS) to a public server (to phone number B).
+The router (your SAT provider) then reserves a random port (a random phone number A) on the WAN interface (within the public phone network) for your exclusive communication.
+Any data sent to this reserved port (phone number A) by the public server (phone number B) is received by your computer (SAT messenger).
+And naturally, such an entry into the router's (provider's) memory comes with a TTL(*4).
+
+The foundational principles of both the telephone network and the computer network aren't all that dissimilar. Take a look at this:
+ftp://100.100.100.100:2021 (port forward to a PC in a private network)
+tel: +100-100-100-100 ext 2021 (You can access 2021 ext in private network via public number)
+These concepts are easily grasped and familiar: protocol, public address, port (or extension in the private network).
+
+While many might not find it challenging to deal with "ext" in their contacts, a contact formatted as 
+sms: +100-100-100-100 ext "my satellite communicator"
+would certainly be an outlier. To simplify matters, "ext" can often be omitted. In the telephone network, call distribution is managed by a PBX (or its equivalent).
+By tweaking the configuration, you can easily drop the "ext." For instance, voice calls (tel:) could be directed straight to internal number 2021,
+while a fax (fax:) might be routed to number 2022. However, SMS delivery is handled by your provider's SMSC (*1), which, naturally, isn't under your control.
+You can't alter its configuration to redirect your SMS where it needs to go. 
+But fret not, we can still get it to do what we need by communicating with it in a language it understands.
+
+Now, let's consider a scenario where your PC resides within a typical SOHO network, and you're unable to administer the router. 
+Say, for instance, you need to access it over the weekend from any internet address (perhaps on port 22 for SSH).
+
+1) You approach the network administrator and request the reservation of a port on the WAN interface, along with the creation of a port forward to your computer. 
+It's common to receive a rejection, and this is perfectly normal.
+
+2) If you have control over a network gateway (such as your home router) with a public address X.X.X.X, you can resolve this matter independently.
+
+3) Initiate a connection from your private network to your public address. 
+The router will then allocate a port for you on the WAN interface (effectively fulfilling your initial request to the administrator, albeit temporarily).
+
+4) Instruct your gateway to forward port X on your public interface X.X.X.X to this connection. Numerous tools can accomplish this, such as ssh -R (or VPN +...).
+With the problem resolved, your PC becomes accessible from the entire internet via the public address X.X.X.X. 
+(However, it's advisable not to proceed, as this could lead to complications.)
+
+Let's consider running the "ssh -R" command over the telephone network :)
+
+While you may not find a software tool specifically designed for this purpose, it's unnecessary. Simply follow the same steps outlined above, one by one.
+
+1) Contact the provider of the messenger you're using and request the reservation of a personal phone number in the public phone network, which you can then assign to your messenger.
+Expect rejection, as this is common.
+
+2) If you possess an active SIM card (or use an internet-based SMS service) with a public phone number under your management, you can resolve this independently.
+Ensure the SIM has an assigned phone number of your choice (from any country like UK, ES, PL, etc.) and at least one active service: SMS (In and Out).
+
+3) Initiate a connection (send an SMS) from your messenger to your public phone number. Your SAT provider will then reserve a phone number for you (random)
+in the public telephone network for your exclusive communication (essentially what you requested from the provider, albeit temporarily). 
+Now you know this number - let's call it "X"
+
+Now, onto the trickiest step:
+
+1) "And instruct your gateway to forward port X on your public interface to this connection" - we need to redirect incoming SMS from our SIM number to number "X"
+Here's a simple yet highly inadvisable (*0) solution that requires no additional software or hardware (warning: do not attempt this, as it could lead to trouble):
+
+4.1) The SMSC (*1) is responsible for forwarding and delivering SMS messages, and unfortunately, we lack access to it. (No, we will not resort to hacking a server with SMSC settings.)
+
+4.1.1) Reach out to your SMS service provider, the one whose SIM you're using, and request them to forward all SMS messages to number "X"
+Be aware that this may not work if the SMSC retains the original sender number.
+Anticipate rejection, as this is standard.
+
+Another simple yet highly inadvisable (*0) solution (warning: do not attempt this, as it could lead to trouble):
+
+4.2) Since altering the SMSC settings proved unsuccessful, we could attempt to mimic "SMSC" functions (receive, store, and forward) from our end. 
+However, we would lose the original sender number, which is precisely what we need. 
+The message would then be forwarded to the SMSC on our behalf and accepted by number "X" (ultimately delivered to our messenger).
+
+Hardware: Any cell phone with the capability to insert your SIM card, equipped with an SMS forward function.
+Software: If a suitable phone is unavailable, seek out a phone app. Most likely, any "SMS forwarder" app will suffice, that performs "Receive - Save - Forward" on our behalf to number "X"
+
+If you've ignored my advice and managed to set up SMS forwarding, congratulations...
+If it was a wager, consider yourself victorious.
+However, swiftly deactivate the forward. 
+Now, why are these approaches deemed "stupid"?
+
+(*0) Yes, indeed, stupid. You've essentially allocated a public, dedicated phone number of your choice to your messenger. Anyone can now send SMS to you. 
+Share this number with Jukka for testing, and he, along with all your other party guests (yes, all 50 of them), will likely put it to the test.
+But here's the kicker: you foot the bill for both forwarding all SMS and delivering them to your messenger.
+However, believe me, that's the least of your worries.
+
+How did your friends realize they couldn't reach you?
+Well, they received an error message, of course. And a single error message from your number "X" to your SIM number puts you in quite the bind.
+When two robots are talking (M2M), one says "it cannot be delivered," and the second robot receives and sends this message back, creating an endless loop.
+And guess who's footing the bill for their chatter? 
+That's right, you are. 
+This is an uncontrollable process: a "loop" in your cellular provider's network.
+
+How many SMS messages can your "solution" handle? Perhaps 100-200 per minute? At a minimum, your account balance will be depleted in an instant, and your SIM card likely blocked. You may also face sanctions. 
+And that's not all. 
+If, due to someone's error, several thousand messages flood the channel you initiated to the satellite provider's network, after paying the bills, your wife may leave you...
+
+4.3) Just another, better way.
+You know how to create an "interface" for communicating with Your messenger from command line, but it does not lend itself to simple paths.
+Opting for a responsible approach is crucial. Each message should be dispatched with absolute certainty, ensuring it's sent only once and not caught in a loop.
+
+This assurance comes at a cost, but satellite networks can adeptly manage high loads without issue. For instance, sailors routinely transmit entire weather maps via satellite messages,
+underscoring the vital nature of such communication, beyond mere amusement.
+
+Should you require it, consider crafting your bespoke solution. Avoid mere SMSC emulation, instead, opt for a secure SMS Gateway.
+While alternatives may exist, each harbors some form of defect, inevitably incurring costs.
+
+Wishing you success!
+
+(*1) SMSC (Short Message Service Center): The SMSC is a vital component of the mobile network, tasked with storing, forwarding, and delivering SMS messages. When a user initiates an SMS message, it first traverses to the SMSC, which subsequently forwards it to the recipient's mobile device.
+
+(*2) SMS Gateway: Functioning as a crucial telecommunications network node, an SMS gateway facilitates the transmission and reception of SMS messages to and from telecommunications networks. It acts as a conduit between the mobile network and other networks, including the Internet or satellite network.
+
+(*3) Sender ID Trust Issues: Public networks present inherent vulnerabilities regarding Sender ID integrity, as it can be easily manipulated.
+Therefore, maintaining a confidential temporary number assigned by your provider, linked to your public SMS number akin to safeguarding your credit card,
+is imperative. All traffic between these numbers incurs charges to your account, irrespective of message ownership. 
+And if, for example, Jukka shares his adventures with your Finnish number, you may have problems,
+since both the public and secret number are already in the public domain. Refer to Your provider's documentation to see how to block such link,
+but sooner or later TTL will kill it automatically in any case.
+
+(*4) TTL and Keep-Alive: As I am not affiliated with your provider, I cannot specify the TTL duration for your temporary number whether it spans days, weeks, months, or until the termination of your subscription. 
+ But since we are using a two-way communicator, logically, while communication is taking place, it will not be interrupted. Naturally, if there is no traffic for a long time, the temporary number will stop working.
+It is absolutely normal practice, if You go God knows where, where the phone does not work, to send Your loved ones at least one message a day.
+"Everything is fine. I'm still alive" (Check-In preset SMS is free and unlimited with my subscription for example).
+Incorporating your server's SMS number into the Check-In recipients list enables seamless tracking and contact. While my satellite provider offers global coverage, extreme scenarios like underwater or subterranean expeditions necessitate proactive measures. send yourself an Keep-Alive SMS from the server side daily, uptime or weather forecast and You will know that
+everything is working. You are guaranteed to be left without communication with your server if any part of the equipment freezes or the power goes out.
+Server message about critically low battery status and message at startup, save your nerves, but how many thousands will you pay for such
+functionality if the server suddenly starts restarting every 5 minutes?.
+I'm not saying anything about the loss of the Internet, it is absolutely not needed for SMS to work, however, for example, you definitely won't
+receive a weather forecast without it. In any case, the check-in-confirm procedure should restart communication.
+
