@@ -140,6 +140,8 @@ So, a project with a budget starting from ~30 Eur with time spent ~30 min.
 If You liked my code and saved some of your valuable time, You can buy me a coffee :)
 Thank you for taking the time to get to know my work.
 
+
+
 https://www.buymeacoffee.com/mrgool
 TON: UQDYUkEvtdO4jZRwCLYen1H2C2DYIYruazRYARPFBXRwwQ05
 BTC: bc1qx6l604eqwn6v6649tlqr8ndz0u96rvq080twg4
