@@ -141,10 +141,11 @@ If You liked my code and saved some of your valuable time, You can buy me a coff
 Thank you for taking the time to get to know my work.
 
 https://www.buymeacoffee.com/mrgool
-
 TON: UQDYUkEvtdO4jZRwCLYen1H2C2DYIYruazRYARPFBXRwwQ05
-
 BTC: bc1qx6l604eqwn6v6649tlqr8ndz0u96rvq080twg4
 
 (*) The tendency of human nature to seek simpler ways of completing tasks can lead to positive results, stimulating progress and innovation in various fields of activity.
 
+
+HUAWEI (https://consumer-img.huawei.com/content/dam/huawei-cbg-site/en/mkt/legal/trademark/huawei-drademark.png) and HUAWEI Trademark Policy are trademarks of Huawei Technologies Co., Ltd registered in China and other countries.
+(I'm not affiliated with HUAWEI)
