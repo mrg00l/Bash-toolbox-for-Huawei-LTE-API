@@ -12,5 +12,3 @@
 - Removed private functions
 - Created Telegram channel to post device information https://t.me/bash4lte_devices
 
-[View release on GitHub](https://github.com/mrg00l/Bash-toolbox-for-Huawei-LTE-API/releases/tag/v1.2)
-
